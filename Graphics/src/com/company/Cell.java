@@ -53,4 +53,8 @@ public class Cell {
     public void setIllIteration(int illIteration) {
         this.illIteration = illIteration;
     }
+
+    public void incrementIllIteration(){illIteration++;}
+
+    public void incrementCurrentIteration(){currentIteration++;}
 }

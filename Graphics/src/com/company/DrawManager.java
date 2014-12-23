@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 
-class Main extends JPanel {
+class DrawManager extends JPanel {
 
     public static int SHIFT_LEFT = 20;
 
@@ -16,7 +16,7 @@ class Main extends JPanel {
 
     public static int RECTS_COUNT = 50;
 
-    public void drawDesk(@NonNull Graphics g) {
+    public void drawSkin(@NonNull Graphics g) {
         Color oldColor = g.getColor();
         for (int i = 0; i < RECTS_COUNT; ++i) {
             for (int j = 0; j < RECTS_COUNT; ++j) {
@@ -29,7 +29,7 @@ class Main extends JPanel {
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Color oldColor = g2d.getColor();
-        drawDesk(g);
+        drawSkin(g);
         g2d.setColor(oldColor);
     }
 
@@ -41,29 +41,31 @@ class Main extends JPanel {
     }
 }
 
-class Points extends JFrame {
+class Drawer extends JFrame {
 
-    public Points() {
-
+    public Drawer() {
         initUI();
     }
 
     private void initUI() {
-        setTitle("Points");
+        setTitle("Desease. Booo!!!");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        add(new Main());
+        add(new DrawManager());
         setSize(350, 400);
         setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {
+        Skin skin = DeseaseApi.initSkin();
+        for(int i = 0; i < 10; ++i) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    Drawer ps = new Drawer();
+                    ps.setVisible(true);
+                }
+            });
 
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Points ps = new Points();
-                ps.setVisible(true);
-            }
-        });
+        }
     }
 }
